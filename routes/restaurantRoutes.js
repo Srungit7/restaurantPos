@@ -1,9 +1,9 @@
-import express from 'express';
-import { createRestaurant, getRestaurants } from '../controllers/restaurantController.js';
+// const express = require('express')
+// import { createRestaurant, getRestaurants } from '../controllers/restaurantController.js';
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get('/', getRestaurants); // Get all restaurants
-router.post('/', createRestaurant); // Create a new restaurant
+// router.get('/', getRestaurants); // Get all restaurants
+// router.post('/', createRestaurant); // Create a new restaurant
 
-export default router;
+// export default router;

@@ -1,3 +1,4 @@
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
@@ -9,4 +10,4 @@ const Restaurant = sequelize.define('Restaurant', {
   timestamps: true, // adds created_at and updated_at automatically
 });
 
-export default Restaurant;
+module.exports = {Restaurant}

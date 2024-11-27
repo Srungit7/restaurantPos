@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database.js');
 
 const Order = sequelize.define('Order', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -10,4 +10,4 @@ const Order = sequelize.define('Order', {
   timestamps: true, // adds created_at and updated_at automatically
 });
 
-export default Order;
+module.exports = Order;

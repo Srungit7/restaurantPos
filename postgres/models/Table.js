@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database.js');
 
 const Table = sequelize.define('Table', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -10,4 +10,4 @@ const Table = sequelize.define('Table', {
   timestamps: true, // adds created_at and updated_at automatically
 });
 
-export default Table;
+module.exports = Table;

@@ -1,46 +1,46 @@
-import Sequelize from "sequelize";
+const sequelize = require("sequelize");
 
-const sequelize = new Sequelize("Restaurant DB", "postgres", "postgres7", {
+const Sequelized = new sequelize("Restaurant DB", "postgres", "postgres7", {
   host: "localhost",
   dialect: "postgres",
 });
 
 const connection = async () => {
   try {
-    await sequelize.authenticate();
+    await Sequelized.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
 };
-export default connection;
+module.exports = { connection };
 
-// import pkg from 'pg';
-// const { Client } = pkg;
+// import pkg from "pg";
+const pkg = require("pg");
 
-// const client = new Client({
-//   host: 'localhost',
-//   user: 'postgres',
-//   port: 5432,
-//   password: 'postgres7',
-//   database: 'Restaurant DB'
-// });
+const { Client } = pkg;
+
+const client = new Client({
+  host: "localhost",
+  user: "postgres",
+  port: 5432,
+  password: "postgres7",
+  database: "Restaurant DB",
+});
 
 // async function testConnection() {
 //   try {
 //     // Connecting to the database
 //     await client.connect();
-//     console.log('Connected to the PostgreSQL database!');
+//     console.log("Connected to the PostgreSQL database!");
 
 //     // Running a simple query
-//     const res = await client.query('SELECT NOW()');
-//     console.log('Database time:', res.rows[0]);
+//     const res = await client.query("SELECT NOW()");
+//     console.log("Database time:", res.rows[0]);
 
 //     // Closing the connection to ensure that postgres is connected to node js
 //     await client.end();
 //   } catch (err) {
-//     console.error('Error connecting to the database:', err.message);
+//     console.error("Error connecting to the database:", err.message);
 //   }
 // }
-
-// testConnection();

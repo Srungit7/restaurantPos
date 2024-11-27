@@ -1,45 +1,40 @@
-//URL - http://localhost:8080
-import express from "express";
-import colors from "colors";
-import cors from "cors";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import router from "./routes/testRoutes.js";
-import sequelize from "./config/database .js";
-import userRoutes from "./routes/userRoutes.js";
-import restaurantRoutes from "./routes/restaurantRoutes.js";
+// Import required modules
+const express = require("express");
+const { connection } = require("./postgres/postgres"); // Ensure this is the correct path for your DB connection
+const userRoutes = require("./routes/userRoutes"); // Correctly importing userRoutes
 
-import connection from "./postgres/postgres.js";
-//dotenv configuration
-dotenv.config();
-
+// Initialize express app
 const app = express();
-const PORT = process.env.PORT || 8080;
-//midllewares
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+const PORT = process.env.PORT || 8080; // Use environment variable or default to 8080
+const { sequelize } = require("./config/database");
 
-//route
-//URL -> http://localhost:8080
-// app.use('/api/v1/test', router);
-// app.get("/", (req, res) => {
-//   return res.status(200).send("<h1> Welcome to my Cafe Server</h1>");
-// });
-app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/restaurants", restaurantRoutes);
+// Middleware
+app.use(express.json()); // Make sure JSON body parsing is enabled
+// for parsing application/json requests
+// Uncomment below if you want to use CORS and logging with morgan
+// const cors = require('cors');
+// const morgan = require('morgan');
+// app.use(cors());  // Enable cross-origin requests
+// app.use(morgan("dev"));  // Enable request logging
 
-// Sync Sequelize models and start server
-sequelize.sync().then(() => {
-  console.log("Database synced");
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+// Routes
+app.get("/", (req, res) => {
+  return res.status(200).send("<h1> Welcome to my Cafe Server</h1>");
 });
 
-//PORT
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`.bgCyan);
-});
+// User routes
+app.use("/api/v1/users", userRoutes); // This should correspond to your routes for user-related operations
 
-connection();
+// Connect to database and start server
+connection(); // Ensure your database connection function is working correctly
+
+// Start the server
+sequelize
+  .sync() // Ensures that the tables are created if they don't exist and syncs changes
+  .then(() => {
+    console.log("Database synced");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((error) => console.error("Error syncing database:", error));
