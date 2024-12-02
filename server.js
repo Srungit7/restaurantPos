@@ -2,7 +2,7 @@
 const express = require("express");
 const { connection } = require("./postgres/postgres"); // Ensure this is the correct path for your DB connection
 const userRoutes = require("./routes/userRoutes"); // Correctly importing userRoutes
-
+const restaurantRoutes = require("./routes/restaurantRoutes");
 // Initialize express app
 const app = express();
 const PORT = process.env.PORT || 8080; // Use environment variable or default to 8080
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 // User routes
 app.use("/api/v1/users", userRoutes); // This should correspond to your routes for user-related operations
-
+app.use("/api/v1/restaurant", restaurantRoutes);
 // Connect to database and start server
 connection(); // Ensure your database connection function is working correctly
 

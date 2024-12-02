@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-// Create a new Sequelize instance for PostgreSQL
+// new Sequelize instance for PostgreSQL
 const sequelize = new Sequelize("Restaurant DB", "postgres", "postgres7", {
   host: "localhost",
   dialect: "postgres",
